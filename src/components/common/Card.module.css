@@ -1,0 +1,42 @@
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  border: 1px solid #e0e0e0;
+}
+
+.card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card[role='button'] {
+  cursor: pointer;
+}
+
+.default {
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.elevated {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.outlined {
+  border: 2px solid #e0e0e0;
+  background-color: #fafafa;
+}
+
+.title {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.content {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
