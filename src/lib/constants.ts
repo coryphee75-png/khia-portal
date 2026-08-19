@@ -2,12 +2,41 @@
 export const ROUTES = {
   HOME: '/',
   LOGIN: '/login',
+  SIGNUP: '/signup',
+  LINK_CHILD: '/link-child',
   PARENT_DASHBOARD: '/dashboard',
+  TEACHER_DASHBOARD: '/teacher',
+  STUDENT_DASHBOARD: '/student',
+  ADMIN_DASHBOARD: '/admin',
   HOMEWORKS: '/homeworks',
   NOTES: '/notes',
   EVALUATIONS: '/evaluations',
   ALBUMS: '/albums',
 } as const;
+
+/**
+ * 역할별 로그인 후 이동할 대시보드 경로를 반환합니다.
+ */
+export function getDashboardRoute(role?: string): string {
+  switch (role) {
+    case 'admin':
+      return ROUTES.ADMIN_DASHBOARD;
+    case 'teacher':
+      return ROUTES.TEACHER_DASHBOARD;
+    case 'student':
+      return ROUTES.STUDENT_DASHBOARD;
+    case 'parent':
+    default:
+      return ROUTES.PARENT_DASHBOARD;
+  }
+}
+
+/**
+ * 특정 반의 콘텐츠 관리 페이지 경로
+ */
+export function getClassManageRoute(classId: string | number): string {
+  return `/manage/classes/${classId}`;
+}
 
 // 등급 색상 매핑
 export const GRADE_COLORS: Record<string, string> = {
@@ -28,6 +57,7 @@ export const GRADE_LEVELS = ['A+', 'A', 'B+', 'B', 'C+', 'C', 'D', 'F'] as const
 export const USER_ROLES = {
   PARENT: 'parent',
   TEACHER: 'teacher',
+  STUDENT: 'student',
   ADMIN: 'admin',
 } as const;
 
@@ -36,6 +66,8 @@ export const API_ENDPOINTS = {
   AUTH_LOGIN: '/api/auth/login',
   AUTH_LOGOUT: '/api/auth/logout',
   PARENT_DASHBOARD: '/api/parent/dashboard',
+  TEACHER_DASHBOARD: '/api/teacher/dashboard',
+  STUDENT_DASHBOARD: '/api/student/dashboard',
   HOMEWORKS: '/api/parent/homeworks',
   NOTES: '/api/parent/notes',
   EVALUATIONS: '/api/parent/evaluations',

@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f5f7fa;
+  background-color: #eaf6fc;
 }
 
 .main {
@@ -18,7 +18,7 @@
 }
 
 .footer {
-  background-color: #333;
+  background-color: #0e2c44;
   color: white;
   text-align: center;
   padding: 2rem;

@@ -32,7 +32,7 @@
 .dateHeader {
   margin: 0 0 1.5rem 0;
   padding-bottom: 0.75rem;
-  border-bottom: 2px solid #667eea;
+  border-bottom: 2px solid #0391D3;
   color: #333;
   font-size: 1.2rem;
   font-weight: 600;
@@ -55,12 +55,8 @@
 
 .noteCard h4 {
   margin: 0 0 0.5rem 0;
-  color: #333;
+  color: #0391D3;
   font-size: 1.1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .teacher {
@@ -86,7 +82,7 @@
   padding-top: 1rem;
   border-top: 1px solid #f0f0f0;
   font-size: 0.85rem;
-  color: #667eea;
+  color: #0391D3;
   font-weight: 500;
 }
 
@@ -186,7 +182,7 @@
   padding: 0.5rem;
   background-color: #f5f7fa;
   border-radius: 4px;
-  color: #667eea;
+  color: #0391D3;
   font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.2s;

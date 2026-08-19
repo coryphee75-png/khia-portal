@@ -2,37 +2,44 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { signIn, getSession } from 'next-auth/react';
+import { getDashboardRoute } from '@/lib/constants';
 
 /**
- * 로그인 페이지 - 3가지 역할별 로그인
+ * 로그인 페이지 - 3가지 역할별 로그인 (학부모 / 선생님 / 학생)
  */
-type UserRole = 'parent' | 'teacher' | 'student';
+type UserRole = 'parent' | 'teacher' | 'student' | 'admin';
 
-const roleInfo = {
+const roleInfo: Record<UserRole, { icon: string; name: string; email: string; password: string }> = {
   parent: {
     icon: '👨‍👩‍👧‍👦',
     name: '학부모',
     email: 'parent@example.com',
     password: 'password',
-    color: 'from-blue-400 to-blue-600',
   },
   teacher: {
     icon: '👨‍🏫',
     name: '선생님',
     email: 'teacher@example.com',
     password: 'password',
-    color: 'from-purple-400 to-purple-600',
   },
   student: {
     icon: '👨‍🎓',
     name: '학생',
     email: 'student@example.com',
     password: 'password',
-    color: 'from-pink-400 to-pink-600',
+  },
+  admin: {
+    icon: '🛠️',
+    name: '관리자',
+    email: 'admin@example.com',
+    password: 'password',
   },
 };
 
 export default function LoginPage() {
+  const router = useRouter();
   const [role, setRole] = useState<UserRole>('parent');
   const [email, setEmail] = useState(roleInfo.parent.email);
   const [password, setPassword] = useState(roleInfo.parent.password);
@@ -47,46 +54,48 @@ export default function LoginPage() {
     setError('');
   };
 
-  // 로그인 처리
+  // 로그인 처리 (실제 NextAuth 인증)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    setIsLoading(true);
 
-    // 테스트용 간단한 검증
     if (!email || !password) {
-      setError('이메일과 비밀번호를 입력해주세요.');
-      setIsLoading(false);
+      setError('아이디와 비밀번호를 입력해주세요.');
       return;
     }
 
-    // 여기서 실제 로그인 로직을 추가할 수 있습니다
-    // 지금은 테스트용으로 간단하게 처리
-    setTimeout(() => {
-      if (
-        email === roleInfo[role].email &&
-        password === roleInfo[role].password
-      ) {
-        alert(`${roleInfo[role].name} 로그인 성공! 🎉`);
-        // router.push('/dashboard');
-      } else {
-        setError('이메일 또는 비밀번호가 올바르지 않습니다.');
-      }
-      setIsLoading(false);
-    }, 500);
+    setIsLoading(true);
+
+    const result = await signIn('credentials', {
+      email,
+      password,
+      redirect: false,
+    });
+
+    setIsLoading(false);
+
+    if (result?.error) {
+      setError('아이디 또는 비밀번호가 올바르지 않습니다.');
+      return;
+    }
+
+    const session = await getSession();
+    router.push(getDashboardRoute(session?.user?.role));
+    router.refresh();
   };
 
   const current = roleInfo[role];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12 max-w-md w-full">
+    <div className="min-h-screen bg-[#EAF6FC] flex items-center justify-center p-4">
+      <div className="bg-white rounded-[28px] shadow-[0_20px_50px_-24px_rgba(3,145,211,0.4)] border border-[#0391D3]/10 p-8 md:p-12 max-w-md w-full">
         {/* 헤더 */}
         <Link href="/" className="flex justify-center mb-6">
           <div className="text-center">
-            <div className="text-4xl mb-2">🎓</div>
-            <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-600">
-              KHIA
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/khia-crest.png" alt="KHIA" className="h-12 w-auto mx-auto mb-2" />
+            <h1 className="text-2xl font-bold text-[#0E2C44]">
+              My KHIA
             </h1>
           </div>
         </Link>
@@ -96,11 +105,12 @@ export default function LoginPage() {
           {(Object.keys(roleInfo) as UserRole[]).map((r) => (
             <button
               key={r}
+              type="button"
               onClick={() => handleTabChange(r)}
               className={`flex-1 py-2 px-3 rounded-lg font-bold transition ${
                 role === r
-                  ? `bg-gradient-to-r ${roleInfo[r].color} text-white`
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  ? 'bg-[#0391D3] text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
               <div className="text-lg mb-1">{roleInfo[r].icon}</div>
@@ -117,17 +127,17 @@ export default function LoginPage() {
             </div>
           )}
 
-          {/* 이메일 입력 */}
+          {/* 아이디 입력 */}
           <div>
             <label className="block text-gray-700 font-bold mb-2">
-              📧 이메일
+              🆔 아이디
             </label>
             <input
-              type="email"
+              type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 transition"
-              placeholder="이메일을 입력하세요"
+              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#0391D3] transition"
+              placeholder="아이디를 입력하세요"
               disabled={isLoading}
             />
           </div>
@@ -141,7 +151,7 @@ export default function LoginPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 transition"
+              className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#0391D3] transition"
               placeholder="비밀번호를 입력하세요"
               disabled={isLoading}
             />
@@ -151,13 +161,13 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full py-3 px-4 rounded-lg font-bold text-white transition transform hover:scale-105 ${
+            className={`w-full py-3 px-4 rounded-lg font-bold text-white transition ${
               isLoading
                 ? 'bg-gray-400 cursor-not-allowed'
-                : `bg-gradient-to-r ${current.color} hover:shadow-lg`
+                : 'bg-[#0391D3] hover:bg-[#0E6FB8]'
             }`}
           >
-            {isLoading ? '로그인 중... ⏳' : '🚀 로그인'}
+            {isLoading ? '로그인 중...' : '로그인'}
           </button>
         </form>
 
@@ -165,65 +175,26 @@ export default function LoginPage() {
         <div className="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded">
           <p className="text-sm font-bold text-gray-700 mb-2">💡 테스트 계정</p>
           <p className="text-xs text-gray-600">
-            📧 {current.email}
+            🆔 {current.email}
             <br />
             🔑 {current.password}
           </p>
         </div>
 
-        {/* 홈 링크 */}
-        <div className="text-center mt-4">
+        {/* 회원가입 / 홈 링크 */}
+        <div className="text-center mt-4 space-y-2">
+          <p className="text-sm text-gray-600">
+            학부모이신가요? 아직 계정이 없다면{' '}
+            <Link href="/signup" className="text-[#0391D3] font-bold hover:underline">
+              회원가입
+            </Link>
+          </p>
           <Link
             href="/"
-            className="text-sm text-gray-600 hover:text-purple-600 transition"
+            className="block text-sm text-gray-600 hover:text-[#0391D3] transition"
           >
             ← 홈으로 돌아가기
           </Link>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-          <div className={styles.formGroup}>
-            <label htmlFor="email">이메일</label>
-            <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="이메일을 입력하세요"
-              required
-              disabled={isLoading}
-            />
-          </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor="password">비밀번호</label>
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="비밀번호를 입력하세요"
-              required
-              disabled={isLoading}
-            />
-          </div>
-
-          <button
-            type="submit"
-            className={styles.submitBtn}
-            disabled={isLoading}
-          >
-            {isLoading ? '로그인 중...' : '로그인'}
-          </button>
-        </form>
-
-        <div className={styles.demoInfo}>
-          <p>테스트 계정:</p>
-          <p>이메일: parent@example.com</p>
-          <p>비밀번호: password</p>
         </div>
       </div>
     </div>

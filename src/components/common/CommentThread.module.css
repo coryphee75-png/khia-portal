@@ -1,0 +1,147 @@
+.thread {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ececf0;
+}
+
+.title {
+  margin: 0 0 0.6rem 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0391D3;
+}
+
+.status {
+  font-size: 0.82rem;
+  color: #999;
+  margin: 0 0 0.75rem 0;
+}
+
+.list {
+  list-style: none;
+  margin: 0 0 0.75rem 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.item {
+  padding: 0.6rem 0.75rem;
+  border-radius: 14px;
+  background: #f8f8fa;
+  max-width: 90%;
+}
+
+.item.staff {
+  background: #EAF6FC;
+  align-self: flex-start;
+}
+
+.item.parent {
+  background: #f8f8fa;
+  align-self: flex-start;
+}
+
+.item.mine {
+  align-self: flex-end;
+  background: #0391D3;
+}
+
+.item.mine .authorName,
+.item.mine .authorRole,
+.item.mine .time,
+.item.mine .itemContent {
+  color: #ffffff;
+}
+
+.itemHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-bottom: 0.2rem;
+}
+
+.authorName {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.authorRole {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #0391D3;
+  background: rgba(3, 145, 211, 0.1);
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+}
+
+.item.mine .authorRole {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.time {
+  font-size: 0.7rem;
+  color: #999;
+  margin-left: auto;
+}
+
+.itemContent {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #333;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.error {
+  font-size: 0.78rem;
+  color: #c92a2a;
+  margin: 0 0 0.5rem 0;
+}
+
+.composer {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.textarea {
+  flex: 1;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #ddd;
+  border-radius: 13px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 2.4rem;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #0391D3;
+}
+
+.submitBtn {
+  flex-shrink: 0;
+  background: #0391D3;
+  color: white;
+  border: none;
+  border-radius: 13px;
+  padding: 0.55rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #0E6FB8;
+}
+
+.submitBtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}

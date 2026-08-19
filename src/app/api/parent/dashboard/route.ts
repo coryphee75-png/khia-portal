@@ -1,6 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
+import { query } from '@/lib/db';
 import { ApiResponse, DashboardData } from '@/types';
+import {
+  ChildRow,
+  HomeworkRow,
+  NoteRow,
+  EvaluationRow,
+  mapChild,
+  mapHomework,
+  mapNote,
+  mapEvaluation,
+} from '@/lib/mappers';
 
 /**
  * GET /api/parent/dashboard
@@ -17,103 +28,66 @@ export async function GET(req: NextRequest): Promise<NextResponse<ApiResponse<Da
       );
     }
 
-    // TODO: 실제 데이터베이스에서 데이터 조회
-    // const children = await query<Child>(
-    //   'SELECT * FROM children WHERE parent_id = $1',
-    //   [session.user.id]
-    // );
+    const parentId = Number(session.user.id);
 
-    // 임시 데이터
+    const childRows = await query<ChildRow>(
+      'SELECT * FROM children WHERE parent_id = $1 ORDER BY id',
+      [parentId]
+    );
+
+    const [homeworkRows, noteRows, evaluationRows, statsRows] = await Promise.all([
+      query<HomeworkRow>(
+        `SELECT h.* FROM homeworks h
+         JOIN children c ON h.child_id = c.id
+         WHERE c.parent_id = $1
+         ORDER BY h.due_date DESC LIMIT 5`,
+        [parentId]
+      ),
+      query<NoteRow>(
+        `SELECT n.* FROM notes n
+         JOIN children c ON n.child_id = c.id
+         WHERE c.parent_id = $1
+         ORDER BY n.date DESC LIMIT 5`,
+        [parentId]
+      ),
+      query<EvaluationRow>(
+        `SELECT e.* FROM evaluations e
+         JOIN children c ON e.child_id = c.id
+         WHERE c.parent_id = $1
+         ORDER BY e.date DESC LIMIT 5`,
+        [parentId]
+      ),
+      query<{
+        total_homeworks: string;
+        completed_homeworks: string;
+        pending_homeworks: string;
+        average_grade: string | null;
+      }>(
+        `SELECT
+           COUNT(h.id) AS total_homeworks,
+           COUNT(h.id) FILTER (WHERE h.status = 'completed') AS completed_homeworks,
+           COUNT(h.id) FILTER (WHERE h.status = 'pending') AS pending_homeworks,
+           (SELECT AVG(e.score) FROM evaluations e
+              JOIN children c2 ON e.child_id = c2.id WHERE c2.parent_id = $1) AS average_grade
+         FROM homeworks h
+         JOIN children c ON h.child_id = c.id
+         WHERE c.parent_id = $1`,
+        [parentId]
+      ),
+    ]);
+
+    const stats = statsRows[0];
+
     const dashboardData: DashboardData = {
-      children: [
-        {
-          id: '1',
-          name: '김학생',
-          grade: 3,
-          classNumber: '2',
-          parentId: session.user.id,
-          createdAt: new Date(),
-        },
-        {
-          id: '2',
-          name: '김학생 2',
-          grade: 1,
-          classNumber: '3',
-          parentId: session.user.id,
-          createdAt: new Date(),
-        },
-      ],
-      recentHomeworks: [
-        {
-          id: '1',
-          childId: '1',
-          title: '수학 문제풀이 20문제',
-          description: 'Chapter 5의 문제를 풀어주세요.',
-          subject: '수학',
-          dueDate: new Date('2024-12-20'),
-          status: 'pending',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          id: '2',
-          childId: '1',
-          title: '영어 단어 암기',
-          description: '제공된 단어장의 단어들을 외워주세요.',
-          subject: '영어',
-          dueDate: new Date('2024-12-19'),
-          status: 'completed',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      ],
-      recentNotes: [
-        {
-          id: '1',
-          childId: '1',
-          date: new Date('2024-12-18'),
-          subject: '수학',
-          content: '오늘은 분수의 덧셈과 뺄셈을 배웠습니다.',
-          teacher: '박선생님',
-          createdAt: new Date(),
-        },
-        {
-          id: '2',
-          childId: '1',
-          date: new Date('2024-12-17'),
-          subject: '과학',
-          content: '식물의 생장 과정에 대해 학습했습니다.',
-          teacher: '이선생님',
-          createdAt: new Date(),
-        },
-      ],
-      recentEvaluations: [
-        {
-          id: '1',
-          childId: '1',
-          date: new Date('2024-12-15'),
-          subject: '수학',
-          score: 95,
-          grade: 'A+',
-          comments: '매우 우수한 성적입니다.',
-          createdAt: new Date(),
-        },
-        {
-          id: '2',
-          childId: '1',
-          date: new Date('2024-12-10'),
-          subject: '영어',
-          score: 87,
-          grade: 'A',
-          comments: '좋은 성적입니다.',
-          createdAt: new Date(),
-        },
-      ],
+      children: childRows.map(mapChild),
+      recentHomeworks: homeworkRows.map(mapHomework),
+      recentNotes: noteRows.map(mapNote),
+      recentEvaluations: evaluationRows.map(mapEvaluation),
       statistics: {
-        totalHomeworks: 15,
-        completedHomeworks: 12,
-        pendingHomeworks: 3,
-        averageGrade: 90.5,
+        totalHomeworks: Number(stats?.total_homeworks || 0),
+        completedHomeworks: Number(stats?.completed_homeworks || 0),
+        pendingHomeworks: Number(stats?.pending_homeworks || 0),
+        averageGrade: stats?.average_grade ? Math.round(Number(stats.average_grade) * 10) / 10 : 0,
         lastUpdate: new Date(),
       },
     };

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Card from '@/components/common/Card';
+import CommentThread from '@/components/common/CommentThread';
 import styles from './page.module.css';
 import { Note } from '@/types';
 
@@ -112,6 +113,7 @@ export default function NotesPage() {
                 </ul>
               </div>
             )}
+            <CommentThread noteId={selectedNote.id} />
           </div>
         </div>
       )}

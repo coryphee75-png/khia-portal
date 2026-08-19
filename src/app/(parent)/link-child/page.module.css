@@ -1,0 +1,83 @@
+.page {
+  animation: fadeIn 0.3s ease-in;
+  max-width: 480px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page h1 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-size: 1.8rem;
+}
+
+.subtitle {
+  color: #777;
+  margin-bottom: 2rem;
+}
+
+.box {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.form {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.form input {
+  flex: 1;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+}
+
+.form button {
+  background: #0391D3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.form button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #ff6b6b;
+  background-color: #ffe0e0;
+  border-radius: 8px;
+  border: 1px solid #ff8787;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.success {
+  color: #2f9e44;
+  background-color: #ebfbee;
+  border-radius: 8px;
+  border: 1px solid #69db7c;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}

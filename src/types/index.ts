@@ -3,7 +3,7 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  role: 'parent' | 'teacher' | 'admin';
+  role: 'parent' | 'teacher' | 'student' | 'admin';
   children?: Child[];
   createdAt: Date;
   updatedAt: Date;
@@ -41,6 +41,17 @@ export interface Note {
   content: string;
   teacher: string;
   attachments?: string[];
+  createdAt: Date;
+}
+
+// 수업일지 댓글
+export interface NoteComment {
+  id: string;
+  noteId: string;
+  authorId: string;
+  authorName: string;
+  authorRole: 'parent' | 'teacher' | 'student' | 'admin';
+  content: string;
   createdAt: Date;
 }
 
@@ -91,6 +102,34 @@ export interface DashboardStatistics {
   pendingHomeworks: number;
   averageGrade: number;
   lastUpdate: Date;
+}
+
+// 반 정보
+export interface ClassInfo {
+  id: string;
+  name: string;
+  grade: number;
+  studentCount: number;
+}
+
+// 선생님 대시보드 데이터
+export interface TeacherDashboardData {
+  classes: ClassInfo[];
+  totalStudents: number;
+  pendingHomeworksToGrade: number;
+  recentNotes: Note[];
+}
+
+// 학생 대시보드 데이터
+export interface StudentDashboardData {
+  homeworks: Homework[];
+  recentNotes: Note[];
+  recentEvaluations: Evaluation[];
+  statistics: {
+    totalHomeworks: number;
+    completedHomeworks: number;
+    averageGrade: number;
+  };
 }
 
 // API 응답

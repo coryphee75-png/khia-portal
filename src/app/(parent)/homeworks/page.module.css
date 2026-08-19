@@ -30,7 +30,7 @@
   padding: 0.5rem 1rem;
   border: 2px solid #e0e0e0;
   background: white;
-  border-radius: 6px;
+  border-radius: 999px;
   cursor: pointer;
   font-weight: 500;
   transition: all 0.3s;
@@ -38,12 +38,12 @@
 }
 
 .filters button:hover {
-  border-color: #667eea;
-  color: #667eea;
+  border-color: #0391D3;
+  color: #0391D3;
 }
 
 .filters button.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #0391D3;
   color: white;
   border-color: transparent;
 }
@@ -98,7 +98,7 @@
 
 .subject {
   margin: 0;
-  color: #667eea;
+  color: #0391D3;
   font-weight: 600;
   font-size: 0.9rem;
 }

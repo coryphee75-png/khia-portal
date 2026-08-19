@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Card from '@/components/common/Card';
+import GreetingBanner from '@/components/common/GreetingBanner';
 import Link from 'next/link';
 import styles from './page.module.css';
 import { ROUTES } from '@/lib/constants';
@@ -21,11 +22,11 @@ export default function DashboardPage() {
     const fetchDashboardData = async () => {
       try {
         const response = await fetch('/api/parent/dashboard');
-        if (!response.ok) {
-          throw new Error('대시보드 데이터를 불러올 수 없습니다.');
+        const result = await response.json();
+        if (!response.ok || !result.success) {
+          throw new Error(result?.error || '대시보드 데이터를 불러올 수 없습니다.');
         }
-        const data = await response.json();
-        setDashboardData(data);
+        setDashboardData(result.data);
       } catch (err) {
         setError(err instanceof Error ? err.message : '오류가 발생했습니다.');
         console.error('Dashboard fetch error:', err);
@@ -47,7 +48,10 @@ export default function DashboardPage() {
 
   return (
     <div className={styles.dashboard}>
-      <h1>안녕하세요, {session?.user?.name || '학부모'}님!</h1>
+      <GreetingBanner
+        name={session?.user?.name || '학부모'}
+        subtitle="자녀의 학습 소식을 한눈에 확인해보세요."
+      />
 
       <div className={styles.grid}>
         {/* 자녀 정보 */}
@@ -145,14 +149,14 @@ export default function DashboardPage() {
           <div className={styles.itemList}>
             {dashboardData?.recentEvaluations && dashboardData.recentEvaluations.length > 0 ? (
               <ul>
-                {dashboardData.recentEvaluations.slice(0, 3).map((eval) => (
-                  <li key={eval.id}>
+                {dashboardData.recentEvaluations.slice(0, 3).map((evaluation) => (
+                  <li key={evaluation.id}>
                     <div className={styles.itemTitle}>
-                      {eval.subject}
-                      <span className={styles.grade}>{eval.grade}</span>
+                      {evaluation.subject}
+                      <span className={styles.grade}>{evaluation.grade}</span>
                     </div>
                     <div className={styles.itemMeta}>
-                      점수: {eval.score} • {new Date(eval.date).toLocaleDateString()}
+                      점수: {evaluation.score} • {new Date(evaluation.date).toLocaleDateString()}
                     </div>
                   </li>
                 ))}

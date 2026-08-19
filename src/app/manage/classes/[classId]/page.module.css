@@ -1,0 +1,287 @@
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.backLink {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #0391D3;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.page h1 {
+  margin: 0 0 1.5rem 0;
+  color: #333;
+  font-size: 1.6rem;
+}
+
+.gradeTag {
+  display: inline-block;
+  background: #0391D3;
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.status,
+.empty {
+  text-align: center;
+  padding: 3rem;
+  color: #999;
+}
+
+.error {
+  color: #ff6b6b;
+  background-color: #ffe0e0;
+  border-radius: 8px;
+  border: 1px solid #ff8787;
+  padding: 1rem;
+}
+
+.childPanel {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.childPanel h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.meta {
+  font-size: 0.85rem;
+  color: #999;
+  font-weight: 400;
+}
+
+.section {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.sectionHeader h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.addBtn {
+  background: #0391D3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.addBtn:hover {
+  background: #0E6FB8;
+}
+
+.itemList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #f7f7f7;
+  font-size: 0.9rem;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.itemMeta {
+  font-size: 0.8rem;
+  color: #999;
+  margin-top: 0.2rem;
+}
+
+.itemActions {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.itemActions button {
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 6px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.itemActions button:hover {
+  background: #f5f5f5;
+}
+
+.emptyItem {
+  color: #bbb;
+  font-size: 0.85rem;
+  padding: 0.5rem 0;
+}
+
+.statusTag {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  background: #eee;
+  color: #666;
+}
+
+.statusTag[data-status='completed'] {
+  background: #d3f9d8;
+  color: #2b8a3e;
+}
+
+.statusTag[data-status='overdue'] {
+  background: #ffe3e3;
+  color: #c92a2a;
+}
+
+.form {
+  margin-top: 0.75rem;
+  padding: 1rem;
+  background: #f9f9fb;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.form input,
+.form select,
+.form textarea {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.form textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+.formActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.formActions button {
+  padding: 0.45rem 1rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.formActions button:first-child {
+  background: #0391D3;
+  color: white;
+}
+
+.formActions button:last-child {
+  background: #eee;
+  color: #555;
+}
+
+.formError {
+  color: #c92a2a;
+  font-size: 0.85rem;
+}
+
+.imageUploadBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.uploadLabel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  background: white;
+  border: 2px dashed #0391D3;
+  border-radius: 6px;
+  color: #0391D3;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.uploadLabel:hover {
+  background: #f0f1ff;
+}
+
+.imageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.75rem;
+}
+
+.imageTile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.imageTile img {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #f0f0f0;
+}
+
+.imageTile input {
+  padding: 0.3rem 0.4rem;
+  font-size: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.imageTile button {
+  border: 1px solid #ffc9c9;
+  color: #c92a2a;
+  background: #fff5f5;
+  border-radius: 4px;
+  padding: 0.2rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+}

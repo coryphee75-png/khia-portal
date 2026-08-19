@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  /* KHIA Learning Hub 브랜드 팔레트("Bright Friendly Modern")와 통일 */
+  --primary: #0391d3;
+  --primary-dark: #0e6fb8;
+  --primary-light: #eaf6fc;
+  --navy: #0e2c44;
+  --text-muted: #8595ab;
+  --text-faint: #94a6b8;
+  --error: #ff6b6b;
+  --success: #51cf66;
+  --warning: #ffa94d;
+  /* Plus Jakarta Sans is self-hosted via @fontsource (imported in layout.tsx) */
+  --font-fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  --font-brand: 'Plus Jakarta Sans', var(--font-fallback);
+  --font-geist-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas,
+    'Liberation Mono', monospace;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-brand);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/*
+ * 이 리셋 스타일을 반드시 @layer base 안에 넣어야 합니다.
+ * Tailwind는 자체 스타일을 CSS cascade layer(@layer theme, base, components, utilities)로 감싸는데,
+ * layer로 감싸지 않은 일반 CSS는 항상 모든 layer보다 우선순위가 높습니다.
+ * 예전에 `a { color: inherit }`를 layer 밖에 그냥 적어뒀더니, 버튼에 준 Tailwind의 `text-white` 같은
+ * 유틸리티 클래스가 항상 무시되는 버그가 있었습니다 (로그인/가입 버튼 글자색이 계속 검정으로 보였음).
+ */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-brand);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font-family: inherit;
+  }
+
+  input, textarea, select {
+    font-family: inherit;
+  }
+}
+
+/* 스크롤바 스타일 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 선택 스타일 */
+::selection {
+  background-color: var(--primary);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--primary);
+  color: white;
+}
