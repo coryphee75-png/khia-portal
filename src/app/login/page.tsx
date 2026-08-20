@@ -11,31 +11,59 @@ import { getDashboardRoute } from '@/lib/constants';
  */
 type UserRole = 'parent' | 'teacher' | 'student' | 'admin';
 
-const roleInfo: Record<UserRole, { icon: string; name: string; email: string; password: string }> = {
+const roleInfo: Record<UserRole, { name: string; email: string; password: string }> = {
   parent: {
-    icon: '👨‍👩‍👧‍👦',
-    name: '학부모',
+    name: 'PARENT',
     email: 'parent@example.com',
     password: 'password',
   },
   teacher: {
-    icon: '👨‍🏫',
-    name: '선생님',
+    name: 'TEACHER',
     email: 'teacher@example.com',
     password: 'password',
   },
   student: {
-    icon: '👨‍🎓',
-    name: '학생',
+    name: 'STUDENT',
     email: 'student@example.com',
     password: 'password',
   },
   admin: {
-    icon: '🛠️',
-    name: '관리자',
+    name: 'ADMIN',
     email: 'admin@example.com',
     password: 'password',
   },
+};
+
+// 세련된 라인 아이콘 (이모지 대체)
+const roleIcons: Record<UserRole, React.ReactElement> = {
+  parent: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+      <circle cx="8" cy="8" r="2.6" />
+      <path d="M3.5 19c0-3 2-5 4.5-5s4.5 2 4.5 5" />
+      <circle cx="16.5" cy="9" r="2.1" />
+      <path d="M13.7 19c.2-2.4 1.7-4 2.8-4 1.8 0 3.5 1.7 3.9 4" />
+    </svg>
+  ),
+  teacher: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+      <rect x="4" y="4" width="16" height="12" rx="2" />
+      <path d="M8 20h8M12 16v4" />
+      <path d="M8 9h5M8 12h3" />
+    </svg>
+  ),
+  student: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+      <path d="M2 8l10-4 10 4-10 4-10-4z" />
+      <path d="M6 10.5V16c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-5.5" />
+      <path d="M22 8v6" />
+    </svg>
+  ),
+  admin: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+      <circle cx="12" cy="12" r="2.8" />
+      <path d="M12 3.5v2.2M12 18.3v2.2M20.5 12h-2.2M5.7 12H3.5M17.7 6.3l-1.5 1.5M7.8 16.2l-1.5 1.5M17.7 17.7l-1.5-1.5M7.8 7.8L6.3 6.3" />
+    </svg>
+  ),
 };
 
 export default function LoginPage() {
@@ -60,7 +88,7 @@ export default function LoginPage() {
     setError('');
 
     if (!email || !password) {
-      setError('아이디와 비밀번호를 입력해주세요.');
+      setError('Please enter your ID and password.');
       return;
     }
 
@@ -75,7 +103,7 @@ export default function LoginPage() {
     setIsLoading(false);
 
     if (result?.error) {
-      setError('아이디 또는 비밀번호가 올바르지 않습니다.');
+      setError('Incorrect ID or password.');
       return;
     }
 
@@ -107,14 +135,14 @@ export default function LoginPage() {
               key={r}
               type="button"
               onClick={() => handleTabChange(r)}
-              className={`flex-1 py-2 px-3 rounded-lg font-bold transition ${
+              className={`flex-1 py-2 px-2 rounded-lg font-bold transition flex flex-col items-center gap-1 ${
                 role === r
                   ? 'bg-[#0391D3] text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
               }`}
             >
-              <div className="text-lg mb-1">{roleInfo[r].icon}</div>
-              <div className="text-xs">{roleInfo[r].name}</div>
+              {roleIcons[r]}
+              <div className="text-[11px] tracking-wide">{roleInfo[r].name}</div>
             </button>
           ))}
         </div>
@@ -130,14 +158,14 @@ export default function LoginPage() {
           {/* 아이디 입력 */}
           <div>
             <label className="block text-gray-700 font-bold mb-2">
-              🆔 아이디
+              ID
             </label>
             <input
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#0391D3] transition"
-              placeholder="아이디를 입력하세요"
+              placeholder="Enter your ID"
               disabled={isLoading}
             />
           </div>
@@ -145,14 +173,14 @@ export default function LoginPage() {
           {/* 비밀번호 입력 */}
           <div>
             <label className="block text-gray-700 font-bold mb-2">
-              🔑 비밀번호
+              Password
             </label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#0391D3] transition"
-              placeholder="비밀번호를 입력하세요"
+              placeholder="Enter your password"
               disabled={isLoading}
             />
           </div>
@@ -167,33 +195,33 @@ export default function LoginPage() {
                 : 'bg-[#0391D3] hover:bg-[#0E6FB8]'
             }`}
           >
-            {isLoading ? '로그인 중...' : '로그인'}
+            {isLoading ? 'Signing in...' : 'Log In'}
           </button>
         </form>
 
         {/* 테스트 계정 정보 */}
         <div className="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded">
-          <p className="text-sm font-bold text-gray-700 mb-2">💡 테스트 계정</p>
+          <p className="text-sm font-bold text-gray-700 mb-2">Test Account</p>
           <p className="text-xs text-gray-600">
-            🆔 {current.email}
+            ID: {current.email}
             <br />
-            🔑 {current.password}
+            Password: {current.password}
           </p>
         </div>
 
         {/* 회원가입 / 홈 링크 */}
         <div className="text-center mt-4 space-y-2">
           <p className="text-sm text-gray-600">
-            학부모이신가요? 아직 계정이 없다면{' '}
+            Are you a parent?{' '}
             <Link href="/signup" className="text-[#0391D3] font-bold hover:underline">
-              회원가입
+              Sign up
             </Link>
           </p>
           <Link
             href="/"
             className="block text-sm text-gray-600 hover:text-[#0391D3] transition"
           >
-            ← 홈으로 돌아가기
+            ← Back to Home
           </Link>
         </div>
       </div>
