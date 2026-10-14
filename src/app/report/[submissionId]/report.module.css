@@ -1,0 +1,450 @@
+/* 영어 성적표 - 화면에서는 A4 종이 2장처럼, 인쇄 시 정확히 A4 2페이지 */
+.screen {
+  background: #e9eef2;
+  min-height: 100vh;
+  padding: 1rem 0 2rem;
+  color: #0e2c44;
+}
+
+.message {
+  padding: 3rem;
+  text-align: center;
+  color: #5b6b78;
+}
+
+.toolbar {
+  max-width: 210mm;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0 0.5rem;
+}
+
+.toolbarHint {
+  flex: 1;
+  font-size: 0.85rem;
+  color: #5b6b78;
+}
+
+.backBtn,
+.printBtn {
+  border-radius: 8px;
+  padding: 0.55rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.backBtn {
+  background: #fff;
+  border: 1px solid #cfdbe3;
+  color: #0e2c44;
+}
+
+.printBtn {
+  background: #0391d3;
+  border: none;
+  color: #fff;
+}
+
+.sheet {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  margin: 0 auto 1.25rem;
+  background: #fff;
+  padding: 14mm 16mm 18mm;
+  box-sizing: border-box;
+  box-shadow: 0 4px 18px rgba(14, 44, 68, 0.12);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #0391d3;
+}
+
+.headerCompact {
+  padding-bottom: 6px;
+  border-bottom-width: 2px;
+}
+
+.crest {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+.headerCompact .crest {
+  width: 34px;
+  height: 34px;
+}
+
+.academy {
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+}
+
+.academySub {
+  font-size: 11.5px;
+  color: #5b6b78;
+  margin-top: 2px;
+}
+
+.draft {
+  margin-top: 8px;
+  padding: 5px 10px;
+  border: 1.5px dashed #d9480f;
+  color: #d9480f;
+  font-weight: 700;
+  font-size: 11px;
+  text-align: center;
+  letter-spacing: 0.04em;
+  border-radius: 6px;
+}
+
+.titleBlock {
+  margin: 18px 0 14px;
+}
+
+.reportLabel {
+  display: inline-block;
+  background: #0e2c44;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.titleBlock h1 {
+  margin: 8px 0 0;
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid #d6e2ea;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.infoItem {
+  padding: 8px 12px;
+  border-right: 1px solid #e3ebf0;
+  border-bottom: 1px solid #e3ebf0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.infoItem:nth-child(3n) {
+  border-right: none;
+}
+
+.infoItem:nth-last-child(-n + 3) {
+  border-bottom: none;
+}
+
+.infoItem span {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #8a99a6;
+}
+
+.infoItem strong {
+  font-size: 13.5px;
+}
+
+.totalRow {
+  display: grid;
+  grid-template-columns: 52mm 1fr;
+  gap: 14px;
+  margin-top: 16px;
+  align-items: stretch;
+}
+
+.totalCard {
+  background: #0e2c44;
+  color: #fff;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+.totalCard span {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.8;
+}
+
+.totalCard strong {
+  font-size: 40px;
+  line-height: 1;
+}
+
+.totalCard small {
+  font-size: 16px;
+  opacity: 0.75;
+}
+
+.totalBar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.totalBar div {
+  height: 100%;
+  background: #4fc3f7;
+}
+
+.scoreTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.scoreTable th {
+  text-align: left;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #5b6b78;
+  border-bottom: 2px solid #0e2c44;
+  padding: 5px 8px;
+}
+
+.scoreTable td {
+  padding: 5px 8px;
+  border-bottom: 1px solid #e3ebf0;
+}
+
+.scoreTable .num,
+.scoreTable th:not(:first-child) {
+  text-align: right;
+}
+
+.totalLine td {
+  font-weight: 800;
+  border-top: 2px solid #0e2c44;
+  border-bottom: none;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  margin: 22px 0 10px;
+  padding-left: 8px;
+  border-left: 4px solid #0391d3;
+}
+
+.chartWrap {
+  border: 1px solid #e3ebf0;
+  border-radius: 10px;
+  padding: 10px 12px 8px;
+}
+
+.chart {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.legend {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  font-size: 10.5px;
+  color: #5b6b78;
+  margin-top: 4px;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legendBar {
+  display: inline-block;
+  width: 14px;
+  height: 8px;
+  background: #0391d3;
+  border-radius: 2px;
+}
+
+.legendAvg {
+  display: inline-block;
+  width: 0;
+  height: 12px;
+  border-left: 2px dashed #0e2c44;
+}
+
+.commentList {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.commentCard {
+  border: 1px solid #d6e2ea;
+  border-left: 4px solid #0391d3;
+  border-radius: 8px;
+  padding: 9px 12px;
+}
+
+.commentHead {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.commentHead span {
+  font-weight: 700;
+  color: #0391d3;
+}
+
+.commentCard p {
+  margin: 5px 0 0;
+  font-size: 12px;
+  line-height: 1.55;
+  color: #33424f;
+}
+
+.overallBox {
+  background: #f3f9fd;
+  border: 1px solid #b7def2;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.signRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.signRow div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-bottom: 1px solid #0e2c44;
+  padding-bottom: 4px;
+}
+
+.signRow span {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #8a99a6;
+}
+
+.signRow strong {
+  font-size: 13px;
+  min-height: 18px;
+}
+
+.footer {
+  position: absolute;
+  left: 16mm;
+  right: 16mm;
+  bottom: 8mm;
+  display: flex;
+  justify-content: space-between;
+  font-size: 9.5px;
+  color: #8a99a6;
+  border-top: 1px solid #e3ebf0;
+  padding-top: 5px;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  .screen {
+    background: #fff;
+    padding: 0;
+  }
+  .toolbar {
+    display: none;
+  }
+  .sheet {
+    margin: 0;
+    box-shadow: none;
+    break-after: page;
+    page-break-after: always;
+  }
+  .sheet:last-of-type {
+    break-after: auto;
+    page-break-after: auto;
+  }
+  .totalCard,
+  .reportLabel,
+  .legendBar,
+  .totalBar div {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .sheet,
+  .sheet * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .sheet {
+    transform-origin: top left;
+    zoom: 0.45;
+  }
+}
+
+.placementBox {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 2px solid #0391d3;
+  background: #f3f9fd;
+  border-radius: 10px;
+  padding: 10px 16px;
+}
+
+.placementBox span {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #0391d3;
+}
+
+.placementBox strong {
+  font-size: 20px;
+  color: #0e2c44;
+}

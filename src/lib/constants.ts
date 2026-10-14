@@ -12,6 +12,7 @@ export const ROUTES = {
   NOTES: '/notes',
   EVALUATIONS: '/evaluations',
   ALBUMS: '/albums',
+  GRADING: '/grading',
 } as const;
 
 /**

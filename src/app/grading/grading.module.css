@@ -1,0 +1,795 @@
+/* KHIA 채점 도우미 공용 스타일 (My KHIA 브랜드: 블루 #0391D3 / 네이비 #0E2C44) */
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.backLink {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #0391d3;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.titleRow h1 {
+  margin: 0;
+  color: #0e2c44;
+  font-size: 1.6rem;
+}
+
+.subtitle {
+  margin: 0.25rem 0 0;
+  color: #5b6b78;
+  font-size: 0.95rem;
+}
+
+.primaryBtn {
+  background: #0391d3;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.primaryBtn:hover {
+  background: #0e6fb8;
+}
+
+.primaryBtn:disabled {
+  background: #9cc9e3;
+  cursor: not-allowed;
+}
+
+.ghostBtn {
+  background: #fff;
+  color: #0391d3;
+  border: 1px solid #0391d3;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.dangerBtn {
+  background: #fff;
+  color: #e03131;
+  border: 1px solid #ffa8a8;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.tab {
+  border: 1px solid #cfe3ee;
+  background: #fff;
+  color: #0e2c44;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.tabActive {
+  background: #0e2c44;
+  border-color: #0e2c44;
+  color: #fff;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(14, 44, 68, 0.06);
+}
+
+.examList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.examItem {
+  margin-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.15s;
+}
+
+.examItem:hover {
+  box-shadow: 0 4px 16px rgba(3, 145, 211, 0.18);
+}
+
+.examTitle {
+  font-weight: 700;
+  color: #0e2c44;
+  font-size: 1.05rem;
+  margin-bottom: 0.3rem;
+}
+
+.examMeta {
+  font-size: 0.85rem;
+  color: #5b6b78;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #eaf6fc;
+  color: #0391d3;
+}
+
+.badgePlacement {
+  background: #fff4e6;
+  color: #d9480f;
+}
+
+.badgeBranch {
+  background: #edf2f7;
+  color: #0e2c44;
+}
+
+.progress {
+  text-align: right;
+  min-width: 120px;
+  font-size: 0.85rem;
+  color: #5b6b78;
+}
+
+.progressNum {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0e2c44;
+}
+
+.empty,
+.status {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #8a99a6;
+}
+
+.error {
+  color: #c92a2a;
+  background: #fff5f5;
+  border: 1px solid #ffa8a8;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.notice {
+  background: #eaf6fc;
+  border: 1px solid #b7def2;
+  color: #0e2c44;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* ===== 폼 ===== */
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: #0e2c44;
+  font-weight: 600;
+}
+
+.field input,
+.field select,
+.field textarea,
+.input {
+  border: 1px solid #cfdbe3;
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  font-family: inherit;
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.fieldFull {
+  grid-column: 1 / -1;
+}
+
+.sectionTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5rem 0 0.75rem;
+}
+
+.sectionTitle h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: #0e2c44;
+}
+
+.areaCard {
+  border-left: 4px solid #0391d3;
+}
+
+.areaHeader {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.areaHeader .input {
+  flex: 1;
+  min-width: 160px;
+  font-weight: 600;
+}
+
+.areaTotal {
+  font-size: 0.85rem;
+  color: #5b6b78;
+  white-space: nowrap;
+}
+
+.tableWrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.qTable {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.qTable th {
+  text-align: left;
+  color: #5b6b78;
+  font-weight: 600;
+  padding: 0.4rem;
+  border-bottom: 1px solid #e3ebf0;
+}
+
+.qTable td {
+  padding: 0.35rem 0.4rem;
+  border-bottom: 1px solid #f1f5f8;
+  vertical-align: top;
+}
+
+.qNo {
+  width: 3rem;
+  font-weight: 700;
+  color: #0e2c44;
+  padding-top: 0.75rem;
+}
+
+.qScore {
+  width: 5.5rem;
+}
+
+.iconBtn {
+  background: none;
+  border: none;
+  color: #adb5bd;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.4rem;
+}
+
+.iconBtn:hover {
+  color: #e03131;
+}
+
+.bulkRow {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: #5b6b78;
+  flex-wrap: wrap;
+}
+
+.bulkRow .input {
+  width: 4.5rem;
+}
+
+.stickyBar {
+  position: sticky;
+  bottom: 0;
+  background: #fff;
+  border-top: 1px solid #e3ebf0;
+  padding: 0.85rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -4px 12px rgba(14, 44, 68, 0.06);
+  margin-top: 1.5rem;
+}
+
+.totalLabel {
+  font-weight: 700;
+  color: #0e2c44;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.stat {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.statValue {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0e2c44;
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  color: #5b6b78;
+}
+
+@media (max-width: 720px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .summaryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .examItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .progress {
+    text-align: left;
+  }
+}
+
+/* ===== 시험 자료 파일 ===== */
+.fileGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.fileSlot {
+  border: 1px dashed #b7def2;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  background: #fbfdff;
+  min-width: 0;
+}
+
+.fileSlotHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.fileSlotTitle {
+  font-weight: 700;
+  color: #0e2c44;
+  font-size: 0.95rem;
+}
+
+.fileSlotHint {
+  font-size: 0.78rem;
+  color: #8a99a6;
+  margin-top: 0.15rem;
+}
+
+.fileSlotHeader label {
+  white-space: nowrap;
+}
+
+.fileEmpty {
+  font-size: 0.82rem;
+  color: #adb5bd;
+}
+
+.fileList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.fileItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  padding: 0.2rem 0;
+  min-width: 0;
+}
+
+.fileName {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #0391d3;
+  text-decoration: none;
+}
+
+span.fileName {
+  color: #0e2c44;
+}
+
+.fileSize {
+  color: #8a99a6;
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .fileGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== 문항 유형 / 템플릿 ===== */
+.qType {
+  width: 9rem;
+}
+
+.qTable textarea {
+  resize: vertical;
+  min-height: 2.3rem;
+}
+
+.typeTag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.1rem 0.45rem;
+  border-radius: 5px;
+  background: #edf2f7;
+  color: #0e2c44;
+  white-space: nowrap;
+}
+
+.rubricCell {
+  font-size: 0.78rem;
+  color: #5b6b78;
+  max-width: 420px;
+}
+
+.templateBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border: 1px solid #b7def2;
+}
+
+/* ===== 학생 답안지 ===== */
+.dropZone {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px dashed #9ccbe6;
+  border-radius: 10px;
+  padding: 1.1rem;
+  background: #f5fbff;
+  cursor: pointer;
+  color: #0391d3;
+}
+
+.dropZone span {
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: #5b6b78;
+}
+
+.dropZone:hover {
+  background: #eaf6fc;
+}
+
+.pageNo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: #0e2c44;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.pageLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.6rem;
+  height: 1.6rem;
+  margin-right: 0.25rem;
+  border-radius: 6px;
+  border: 1px solid #b7def2;
+  color: #0391d3;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pageLink:hover {
+  background: #eaf6fc;
+}
+
+.statusTag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.status_pending {
+  background: #fff4e6;
+  color: #d9480f;
+}
+
+.status_ai_graded {
+  background: #eaf6fc;
+  color: #0391d3;
+}
+
+.status_reviewed {
+  background: #ebfbee;
+  color: #2b8a3e;
+}
+
+.clamp2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  cursor: help;
+}
+
+/* ===== AI 채점 결과 ===== */
+.primaryBtnSm {
+  background: #0391d3;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primaryBtnSm:disabled,
+.ghostBtn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.aiErrorCell {
+  color: #c92a2a;
+  font-size: 0.8rem;
+  background: #fff5f5;
+}
+
+.resultBox {
+  background: #f8fbfd;
+  border: 1px solid #d6e9f5;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.resultSummary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+  color: #0e2c44;
+}
+
+.flagTag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: #fff4e6;
+  color: #d9480f;
+  white-space: nowrap;
+}
+
+.rowFlag {
+  background: #fffaf3;
+}
+
+.areaResultGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.6rem;
+}
+
+.areaResult {
+  background: #fff;
+  border: 1px solid #e3ebf0;
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+}
+
+.areaResultHead {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  color: #0e2c44;
+  font-size: 0.9rem;
+}
+
+.areaResult p {
+  margin: 0.35rem 0 0;
+  font-size: 0.8rem;
+  color: #5b6b78;
+  line-height: 1.45;
+}
+
+.answerDetails {
+  margin-top: 0.75rem;
+}
+
+.answerDetails summary {
+  cursor: pointer;
+  color: #0391d3;
+  font-weight: 600;
+  font-size: 0.88rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ===== 점수 입력 / 검수 ===== */
+.scoreInput {
+  width: 4.5rem !important;
+  padding: 0.35rem 0.45rem !important;
+  text-align: right;
+}
+
+.commentInput {
+  margin-top: 0.4rem;
+  font-size: 0.8rem !important;
+  line-height: 1.45;
+  resize: vertical;
+}
+
+.teacherBox {
+  background: #fff;
+  border: 1px solid #ffd8a8;
+  border-left: 4px solid #f08c00;
+  border-radius: 8px;
+  padding: 0.75rem 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.teacherGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5rem 1rem;
+  margin-top: 0.6rem;
+}
+
+.teacherItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #0e2c44;
+}
+
+.teacherInputRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 400;
+  color: #5b6b78;
+  white-space: nowrap;
+}
+
+.reviewBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e3ebf0;
+}
+
+.commentTools {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.4rem;
+}
+
+.commentTools .input {
+  font-size: 0.78rem;
+  padding: 0.4rem 0.55rem;
+}
+
+.missRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0e2c44;
+  margin-bottom: 0.85rem;
+}
+
+.missRow .input {
+  width: auto;
+}

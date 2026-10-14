@@ -57,6 +57,9 @@ export function Header() {
                   {session.user.role === 'admin' && (
                     <Link href={ROUTES.ADMIN_DASHBOARD}>반 관리</Link>
                   )}
+                  {(session.user.role === 'teacher' || session.user.role === 'admin') && (
+                    <Link href={ROUTES.GRADING}>채점 도우미</Link>
+                  )}
                   <a href="https://khia.netlify.app/" target="_blank" rel="noopener noreferrer">
                     KHIA Learning Hub ↗
                   </a>
